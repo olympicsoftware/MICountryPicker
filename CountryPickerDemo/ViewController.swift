@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openPickerAction(_ sender: AnyObject) {
-        let picker = MICountryPicker { (name, code) -> () in
+        let picker = CountryPickerViewController { (name, code) -> () in
             print(code)
         }
         
@@ -34,8 +34,8 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: MICountryPickerDelegate {
-    func countryPicker(_ picker: MICountryPicker, didSelectCountryWithName name: String, code: String) {
+extension ViewController: CountryPickerDelegate {
+    func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String) {
         picker.navigationController?.popToRootViewController(animated: true)
         label.text = "Selected Country: \(name)"
     }
