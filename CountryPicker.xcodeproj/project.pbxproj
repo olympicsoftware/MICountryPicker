@@ -101,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				505571F11EEF96F000ADCD09 /* CountryPicker */,
-				05B2583E1C54EA80002F01FA /* Demo */,
-				05B258531C54EA80002F01FA /* MICountryPickerTests */,
+				05B2583E1C54EA80002F01FA /* CountryPickerDemo */,
+				05B258531C54EA80002F01FA /* CountryPickerTests */,
 				05B2583D1C54EA80002F01FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,7 +117,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		05B2583E1C54EA80002F01FA /* Demo */ = {
+		05B2583E1C54EA80002F01FA /* CountryPickerDemo */ = {
 			isa = PBXGroup;
 			children = (
 				05B2583F1C54EA80002F01FA /* AppDelegate.swift */,
@@ -127,16 +127,18 @@
 				05B258431C54EA80002F01FA /* Main.storyboard */,
 				05B258411C54EA80002F01FA /* ViewController.swift */,
 			);
-			path = Demo;
+			name = CountryPickerDemo;
+			path = CountryPickerDemo;
 			sourceTree = "<group>";
 		};
-		05B258531C54EA80002F01FA /* MICountryPickerTests */ = {
+		05B258531C54EA80002F01FA /* CountryPickerTests */ = {
 			isa = PBXGroup;
 			children = (
 				05B258561C54EA80002F01FA /* Info.plist */,
 				05B258541C54EA80002F01FA /* MICountryPickerTests.swift */,
 			);
-			path = MICountryPickerTests;
+			name = CountryPickerTests;
+			path = CountryPickerTests;
 			sourceTree = "<group>";
 		};
 		505571F11EEF96F000ADCD09 /* CountryPicker */ = {
@@ -232,6 +234,7 @@
 				TargetAttributes = {
 					05B2583B1C54EA80002F01FA = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = Z6LKC7ARK2;
 						LastSwiftMigration = 0800;
 					};
 					05B2584F1C54EA80002F01FA = {
@@ -445,7 +448,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Demo/Info.plist;
+				DEVELOPMENT_TEAM = Z6LKC7ARK2;
+				INFOPLIST_FILE = CountryPickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPicker;
@@ -459,7 +463,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Demo/Info.plist;
+				DEVELOPMENT_TEAM = Z6LKC7ARK2;
+				INFOPLIST_FILE = CountryPickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPicker;
@@ -472,7 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MICountryPickerTests/Info.plist;
+				INFOPLIST_FILE = CountryPickerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPickerTests;
@@ -486,7 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MICountryPickerTests/Info.plist;
+				INFOPLIST_FILE = CountryPickerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPickerTests;
