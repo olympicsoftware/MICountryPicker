@@ -53,7 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		05214F001C55226B00F57DA5 /* assets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = assets.bundle; path = ../Source/assets.bundle; sourceTree = "<group>"; };
+		05214F001C55226B00F57DA5 /* assets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = assets.bundle; path = assets.bundle; sourceTree = "<group>"; };
 		05B2583C1C54EA80002F01FA /* CountryPickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountryPickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B2583F1C54EA80002F01FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05B258411C54EA80002F01FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,8 +64,8 @@
 		05B258501C54EA80002F01FA /* CountryPickerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountryPickerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B258541C54EA80002F01FA /* MICountryPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MICountryPickerTests.swift; sourceTree = "<group>"; };
 		05B258561C54EA80002F01FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05B258641C54EC67002F01FA /* MICountryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MICountryPicker.swift; path = ../Source/MICountryPicker.swift; sourceTree = "<group>"; };
-		3DCC64C31DC3980800D83B54 /* CallingCodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CallingCodes.plist; path = ../Source/CallingCodes.plist; sourceTree = "<group>"; };
+		05B258641C54EC67002F01FA /* MICountryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MICountryPicker.swift; path = MICountryPicker.swift; sourceTree = "<group>"; };
+		3DCC64C31DC3980800D83B54 /* CallingCodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CallingCodes.plist; path = CallingCodes.plist; sourceTree = "<group>"; };
 		505571F01EEF96F000ADCD09 /* CountryPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CountryPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		505571F21EEF96F000ADCD09 /* CountryPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryPicker.h; sourceTree = "<group>"; };
 		505571F31EEF96F000ADCD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,9 +100,9 @@
 		05B258331C54EA80002F01FA = {
 			isa = PBXGroup;
 			children = (
+				505571F11EEF96F000ADCD09 /* CountryPicker */,
 				05B2583E1C54EA80002F01FA /* Demo */,
 				05B258531C54EA80002F01FA /* MICountryPickerTests */,
-				505571F11EEF96F000ADCD09 /* CountryPicker */,
 				05B2583D1C54EA80002F01FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,21 +121,21 @@
 			isa = PBXGroup;
 			children = (
 				05B2583F1C54EA80002F01FA /* AppDelegate.swift */,
-				05B258411C54EA80002F01FA /* ViewController.swift */,
-				05B258431C54EA80002F01FA /* Main.storyboard */,
 				05B258461C54EA80002F01FA /* Assets.xcassets */,
-				05B258481C54EA80002F01FA /* LaunchScreen.storyboard */,
 				05B2584B1C54EA80002F01FA /* Info.plist */,
+				05B258481C54EA80002F01FA /* LaunchScreen.storyboard */,
+				05B258431C54EA80002F01FA /* Main.storyboard */,
+				05B258411C54EA80002F01FA /* ViewController.swift */,
 			);
 			name = Demo;
-			path = MICountryPicker;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		05B258531C54EA80002F01FA /* MICountryPickerTests */ = {
 			isa = PBXGroup;
 			children = (
-				05B258541C54EA80002F01FA /* MICountryPickerTests.swift */,
 				05B258561C54EA80002F01FA /* Info.plist */,
+				05B258541C54EA80002F01FA /* MICountryPickerTests.swift */,
 			);
 			path = MICountryPickerTests;
 			sourceTree = "<group>";
@@ -144,10 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				3DCC64C31DC3980800D83B54 /* CallingCodes.plist */,
-				05B258641C54EC67002F01FA /* MICountryPicker.swift */,
-				05214F001C55226B00F57DA5 /* assets.bundle */,
 				505571F21EEF96F000ADCD09 /* CountryPicker.h */,
 				505571F31EEF96F000ADCD09 /* Info.plist */,
+				05B258641C54EC67002F01FA /* MICountryPicker.swift */,
+				05214F001C55226B00F57DA5 /* assets.bundle */,
 			);
 			path = CountryPicker;
 			sourceTree = "<group>";
@@ -343,6 +343,7 @@
 				05B258441C54EA80002F01FA /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		05B258481C54EA80002F01FA /* LaunchScreen.storyboard */ = {
@@ -351,6 +352,7 @@
 				05B258491C54EA80002F01FA /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -444,7 +446,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MICountryPicker/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPicker;
@@ -458,7 +460,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MICountryPicker/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mi.MICountryPicker;
