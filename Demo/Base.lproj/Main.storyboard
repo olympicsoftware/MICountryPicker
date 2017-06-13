@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
     </dependencies>
     <scenes>
-        <!--CountryPickerDemo-->
+        <!--CountryPicker-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MICountryPicker" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             <constraint firstItem="QCt-pK-p4O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="s6Q-Z7-8bq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="CountryPickerDemo" id="Y5f-ph-kgh"/>
+                    <navigationItem key="navigationItem" title="CountryPicker" id="Y5f-ph-kgh"/>
                     <connections>
                         <outlet property="label" destination="rX3-aT-bcp" id="c5G-kr-RNH"/>
                     </connections>

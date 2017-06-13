@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "505571EF1EEF96F000ADCD09"
-               BuildableName = "CountryPicker.framework"
-               BlueprintName = "CountryPicker"
-               ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
+               BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
+               BuildableName = "CountryPickerDemo.app"
+               BlueprintName = "CountryPickerDemo"
+               ReferencedContainer = "container:CountryPicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "05B2584F1C54EA80002F01FA"
+               BuildableName = "CountryPickerTests.xctest"
+               BlueprintName = "CountryPickerTests"
+               ReferencedContainer = "container:CountryPicker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPicker.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +61,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "505571EF1EEF96F000ADCD09"
-            BuildableName = "CountryPicker.framework"
-            BlueprintName = "CountryPicker"
-            ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
+            BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPicker.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +80,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "505571EF1EEF96F000ADCD09"
-            BuildableName = "CountryPicker.framework"
-            BlueprintName = "CountryPicker"
-            ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
+            BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPicker.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
