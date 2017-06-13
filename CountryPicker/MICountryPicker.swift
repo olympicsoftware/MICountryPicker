@@ -122,6 +122,11 @@ open class MICountryPicker: UITableViewController {
         definesPresentationContext = true
     }
     
+    func statusBarHeight() -> CGFloat {
+        let statusBarSize = UIApplication.shared.statusBarFrame.size
+        return Swift.min(statusBarSize.width, statusBarSize.height)
+    }
+    
     // MARK: Methods
     
     fileprivate func createSearchBar() {
@@ -154,7 +159,6 @@ open class MICountryPicker: UITableViewController {
 // MARK: - Table view data source
 
 extension MICountryPicker {
-    
     override open func numberOfSections(in tableView: UITableView) -> Int {
         if searchController.searchBar.text!.characters.count > 0 {
             return 1
@@ -170,7 +174,6 @@ extension MICountryPicker {
     }
     
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var tempCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
         
         if tempCell == nil {
@@ -220,7 +223,6 @@ extension MICountryPicker {
 // MARK: - Table view delegate
 
 extension MICountryPicker {
-    
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let country: MICountry!
@@ -240,9 +242,8 @@ extension MICountryPicker {
 // MARK: - UISearchDisplayDelegate
 
 extension MICountryPicker: UISearchResultsUpdating {
-    
     public func updateSearchResults(for searchController: UISearchController) {
-        filter(searchController.searchBar.text!)
+        let _ = filter(searchController.searchBar.text!)
         tableView.reloadData()
     }
 }

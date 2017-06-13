@@ -127,7 +127,6 @@
 				05B258431C54EA80002F01FA /* Main.storyboard */,
 				05B258411C54EA80002F01FA /* ViewController.swift */,
 			);
-			name = CountryPickerDemo;
 			path = CountryPickerDemo;
 			sourceTree = "<group>";
 		};
@@ -137,7 +136,6 @@
 				05B258561C54EA80002F01FA /* Info.plist */,
 				05B258541C54EA80002F01FA /* MICountryPickerTests.swift */,
 			);
-			name = CountryPickerTests;
 			path = CountryPickerTests;
 			sourceTree = "<group>";
 		};
@@ -517,7 +515,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CountryPicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nz.co.olympic.CountryPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -545,7 +543,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CountryPicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nz.co.olympic.CountryPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";

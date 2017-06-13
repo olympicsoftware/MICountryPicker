@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CountryPicker
 
 class ViewController: UIViewController {
 
@@ -17,25 +18,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openPickerAction(_ sender: AnyObject) {
-        
         let picker = MICountryPicker { (name, code) -> () in
             print(code)
         }
         
-        // Optional: To pick from custom countries list
-        picker.customCountriesCode = ["EG", "US", "AF", "AQ", "AX"]
-        
         // delegate
         picker.delegate = self
 
-        // Display calling codes
-//        picker.showCallingCodes = true
-
-        // or closure
         picker.didSelectCountryClosure = { name, code in
             picker.navigationController?.popToRootViewController(animated: true)
             print(code)
         }
+        
         navigationController?.pushViewController(picker, animated: true)
     }
 }
