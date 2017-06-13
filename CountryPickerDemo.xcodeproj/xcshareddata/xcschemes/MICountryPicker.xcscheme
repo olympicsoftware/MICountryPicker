@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
-               BuildableName = "MICountryPicker.app"
-               BlueprintName = "MICountryPicker"
-               ReferencedContainer = "container:MICountryPicker.xcodeproj">
+               BuildableName = "CountryPickerDemo.app"
+               BlueprintName = "CountryPickerDemo"
+               ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "05B2584F1C54EA80002F01FA"
-               BuildableName = "MICountryPickerTests.xctest"
-               BlueprintName = "MICountryPickerTests"
-               ReferencedContainer = "container:MICountryPicker.xcodeproj">
+               BuildableName = "CountryPickerDemoTests.xctest"
+               BlueprintName = "CountryPickerDemoTests"
+               ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
-            BuildableName = "MICountryPicker.app"
-            BlueprintName = "MICountryPicker"
-            ReferencedContainer = "container:MICountryPicker.xcodeproj">
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
-            BuildableName = "MICountryPicker.app"
-            BlueprintName = "MICountryPicker"
-            ReferencedContainer = "container:MICountryPicker.xcodeproj">
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "05B2583B1C54EA80002F01FA"
-            BuildableName = "MICountryPicker.app"
-            BlueprintName = "MICountryPicker"
-            ReferencedContainer = "container:MICountryPicker.xcodeproj">
+            BuildableName = "CountryPickerDemo.app"
+            BlueprintName = "CountryPickerDemo"
+            ReferencedContainer = "container:CountryPickerDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
