@@ -1,42 +1,25 @@
-//
-//  ViewController.swift
-//  MICountryPicker
-//
-//  Created by Ibrahim, Mustafa on 1/24/16.
-//  Copyright © 2016 Mustafa Ibrahim. All rights reserved.
-//
-
 import UIKit
 import CountryPicker
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var image: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func openPickerAction(_ sender: AnyObject) {
-        let picker = CountryPickerViewController { (name, code) -> () in
-            print(code)
-        }
+        let picker = CountryPickerViewController()
         
-        // delegate
-        picker.delegate = self
 
-        picker.didSelectCountryClosure = { name, code in
+        picker.didSelectCountryClosure = { name, code, image in
             picker.navigationController?.popToRootViewController(animated: true)
-            print(code)
+            
+            self.label.text = "Selected Country: \(name)"
+            self.image.image = image
         }
         
         navigationController?.pushViewController(picker, animated: true)
-    }
-}
-
-extension ViewController: CountryPickerDelegate {
-    func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String) {
-        picker.navigationController?.popToRootViewController(animated: true)
-        label.text = "Selected Country: \(name)"
     }
 }

@@ -24,6 +24,7 @@ struct Section {
 @objc public protocol CountryPickerDelegate: class {
     func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String)
     @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String)
+    @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String, image: UIImage)
 }
 
 open class CountryPickerViewController: UITableViewController {
@@ -34,8 +35,10 @@ open class CountryPickerViewController: UITableViewController {
         guard let path = resourceBundle.path(forResource: "CallingCodes", ofType: "plist") else { return [] }
         return NSArray(contentsOfFile: path) as! [[String: String]]
     }()
+    
     fileprivate var searchController: UISearchController!
     fileprivate var filteredList = [Country]()
+    
     fileprivate var unsourtedCountries : [Country] {
         let locale = Locale.current
         var unsourtedCountries = [Country]()
@@ -59,7 +62,6 @@ open class CountryPickerViewController: UITableViewController {
     
     fileprivate var _sections: [Section]?
     fileprivate var sections: [Section] {
-        
         if _sections != nil {
             return _sections!
         }
@@ -91,14 +93,14 @@ open class CountryPickerViewController: UITableViewController {
         
         return _sections!
     }
-    fileprivate let collation = UILocalizedIndexedCollation.current()
-        as UILocalizedIndexedCollation
+    fileprivate let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
+    
     open weak var delegate: CountryPickerDelegate?
-    open var didSelectCountryClosure: ((String, String) -> ())?
+    open var didSelectCountryClosure: ((String, String, UIImage) -> ())?
     open var didSelectCountryWithCallingCodeClosure: ((String, String, String) -> ())?
     open var showCallingCodes = false
 
-    convenience public init(completionHandler: @escaping ((String, String) -> ())) {
+    convenience public init(completionHandler: @escaping ((String, String, UIImage) -> ())) {
         self.init()
         self.didSelectCountryClosure = completionHandler
     }
@@ -112,13 +114,6 @@ open class CountryPickerViewController: UITableViewController {
         
         definesPresentationContext = true
     }
-    
-    func statusBarHeight() -> CGFloat {
-        let statusBarSize = UIApplication.shared.statusBarFrame.size
-        return Swift.min(statusBarSize.width, statusBarSize.height)
-    }
-    
-    // MARK: Methods
     
     fileprivate func createSearchBar() {
         if self.tableView.tableHeaderView == nil {
@@ -147,8 +142,6 @@ open class CountryPickerViewController: UITableViewController {
     }
 }
 
-// MARK: - Table view data source
-
 extension CountryPickerViewController {
     override open func numberOfSections(in tableView: UITableView) -> Int {
         if searchController.searchBar.text!.characters.count > 0 {
@@ -173,64 +166,57 @@ extension CountryPickerViewController {
         
         let cell: UITableViewCell! = tempCell
         
-        let country: Country!
-        if searchController.searchBar.text!.characters.count > 0 {
-            country = filteredList[(indexPath as NSIndexPath).row]
-        } else {
-            country = sections[(indexPath as NSIndexPath).section].countries[(indexPath as NSIndexPath).row]
-            
-        }
+        let country = searchController.searchBar.text!.characters.count > 0
+            ? filteredList[(indexPath as NSIndexPath).row]
+            : sections[(indexPath as NSIndexPath).section].countries[(indexPath as NSIndexPath).row]
 
-        if showCallingCodes {
-            cell.textLabel?.text = country.name + " (" + country.dialCode! + ")"
-        } else {
-            cell.textLabel?.text = country.name
-        }
+        cell.textLabel?.text = showCallingCodes
+            ? country.name + " (" + country.dialCode! + ")"
+            : country.name
 
-        let bundle = "assets.bundle/"
-        cell.imageView!.image = UIImage(named: bundle + country.code.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)
+        
+        cell.imageView!.image = imageForCountry(country)
         return cell
     }
     
     override open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if !sections[section].countries.isEmpty {
-            return self.collation.sectionTitles[section] as String
-        }
-        return ""
+        return !sections[section].countries.isEmpty
+            ? self.collation.sectionTitles[section] as String
+            : ""
     }
     
     override open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return collation.sectionIndexTitles
     }
     
-    override open func tableView(_ tableView: UITableView,
-        sectionForSectionIndexTitle title: String,
-        at index: Int)
-        -> Int {
-            return collation.section(forSectionIndexTitle: index)
+    override open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return collation.section(forSectionIndexTitle: index)
+    }
+    
+    fileprivate func imageForCountry(_ country: Country) -> UIImage {
+        let bundle = "assets.bundle/"
+        return UIImage(named: bundle + country.code.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)!
     }
 }
-
-// MARK: - Table view delegate
 
 extension CountryPickerViewController {
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let country: Country!
-        if searchController.searchBar.text!.characters.count > 0 {
-            country = filteredList[(indexPath as NSIndexPath).row]
-        } else {
-            country = sections[(indexPath as NSIndexPath).section].countries[(indexPath as NSIndexPath).row]
-            
-        }
+        
+        let country = searchController.searchBar.text!.characters.count > 0
+            ? filteredList[(indexPath as NSIndexPath).row]
+            : sections[(indexPath as NSIndexPath).section].countries[(indexPath as NSIndexPath).row]
+        
+        let image = imageForCountry(country)
+        
         delegate?.countryPicker(self, didSelectCountryWithName: country.name, code: country.code)
         delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode)
-        didSelectCountryClosure?(country.name, country.code)
+        delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode, image: image)
+        
+        didSelectCountryClosure?(country.name, country.code, image)
         didSelectCountryWithCallingCodeClosure?(country.name, country.code, country.dialCode)
     }
 }
-
-// MARK: - UISearchDisplayDelegate
 
 extension CountryPickerViewController: UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
