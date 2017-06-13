@@ -12,8 +12,7 @@ class ViewController: UIViewController {
     @IBAction func openPickerAction(_ sender: AnyObject) {
         let picker = CountryPickerViewController()
         
-
-        picker.didSelectCountryClosure = { name, code, image in
+        picker.didSelectCountryClosure = { name, code, dialCode, image in
             picker.navigationController?.popToRootViewController(animated: true)
             
             self.label.text = "Selected Country: \(name)"

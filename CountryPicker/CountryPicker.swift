@@ -24,7 +24,7 @@ struct Section {
 @objc public protocol CountryPickerDelegate: class {
     func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String)
     @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String)
-    @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String, image: UIImage)
+    @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String, image: UIImage?)
 }
 
 open class CountryPickerViewController: UITableViewController {
@@ -96,14 +96,8 @@ open class CountryPickerViewController: UITableViewController {
     fileprivate let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
     
     open weak var delegate: CountryPickerDelegate?
-    open var didSelectCountryClosure: ((String, String, UIImage) -> ())?
-    open var didSelectCountryWithCallingCodeClosure: ((String, String, String) -> ())?
+    open var didSelectCountryClosure: ((String, String, String, UIImage?) -> ())?
     open var showCallingCodes = false
-
-    convenience public init(completionHandler: @escaping ((String, String, UIImage) -> ())) {
-        self.init()
-        self.didSelectCountryClosure = completionHandler
-    }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -193,9 +187,9 @@ extension CountryPickerViewController {
         return collation.section(forSectionIndexTitle: index)
     }
     
-    fileprivate func imageForCountry(_ country: Country) -> UIImage {
+    fileprivate func imageForCountry(_ country: Country) -> UIImage? {
         let bundle = "assets.bundle/"
-        return UIImage(named: bundle + country.code.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)!
+        return UIImage(named: bundle + country.code.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)
     }
 }
 
@@ -213,8 +207,7 @@ extension CountryPickerViewController {
         delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode)
         delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode, image: image)
         
-        didSelectCountryClosure?(country.name, country.code, image)
-        didSelectCountryWithCallingCodeClosure?(country.name, country.code, country.dialCode)
+        didSelectCountryClosure?(country.name, country.code, country.dialCode, image)
     }
 }
 
