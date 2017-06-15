@@ -1,7 +1,7 @@
 import UIKit
 import CountryPicker
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CountryPickerDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var image: UIImageView!
     
@@ -12,13 +12,14 @@ class ViewController: UIViewController {
     @IBAction func openPickerAction(_ sender: AnyObject) {
         let picker = CountryPickerViewController()
         
-        picker.didSelectCountryClosure = { name, code, dialCode, image in
-            picker.navigationController?.popToRootViewController(animated: true)
-            
-            self.label.text = "Selected Country: \(name)"
-            self.image.image = image
-        }
+        picker.delegate = self
         
         navigationController?.pushViewController(picker, animated: true)
+    }
+    
+    func countryPicker(_ picker: CountryPickerViewController, didSelectCountry country: Country) {
+        label.text = country.name
+        image.image = country.flagImage
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -1,15 +1,16 @@
 import UIKit
 
-class Country: NSObject {
-    let name: String
-    let code: String
-    var section: Int?
-    let dialCode: String!
+public class Country : NSObject {
+    public let name: String
+    public let code: String
+    public let dialCode: String?
+    public let flagImage: UIImage?
     
-    init(name: String, code: String, dialCode: String = " - ") {
+    init(name: String, code: String, dialCode: String?, flagImage: UIImage?) {
         self.name = name
         self.code = code
         self.dialCode = dialCode
+        self.flagImage = flagImage
     }
 }
 
@@ -21,10 +22,8 @@ struct Section {
     }
 }
 
-@objc public protocol CountryPickerDelegate: class {
-    func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String)
-    @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String)
-    @objc optional func countryPicker(_ picker: CountryPickerViewController, didSelectCountryWithName name: String, code: String, dialCode: String, image: UIImage?)
+public protocol CountryPickerDelegate: class {
+    func countryPicker(_ picker: CountryPickerViewController, didSelectCountry country: Country)
 }
 
 open class CountryPickerViewController: UITableViewController {
@@ -47,13 +46,9 @@ open class CountryPickerViewController: UITableViewController {
         for countryCode in countriesCodes {
             let displayName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
             let countryData = CallingCodes.filter { $0["code"] == countryCode }
-            let country: Country
-
-            if countryData.count > 0, let dialCode = countryData[0]["dial_code"] {
-                country = Country(name: displayName!, code: countryCode, dialCode: dialCode)
-            } else {
-                country = Country(name: displayName!, code: countryCode)
-            }
+            
+            let country = Country(name: displayName!, code: countryCode, dialCode: countryData.first?["dial_code"], flagImage: imageForCountryCode(countryCode))
+            
             unsourtedCountries.append(country)
         }
         
@@ -66,10 +61,10 @@ open class CountryPickerViewController: UITableViewController {
             return _sections!
         }
         
-        let countries: [Country] = unsourtedCountries.map { country in
-            let country = Country(name: country.name, code: country.code, dialCode: country.dialCode)
-            country.section = collation.section(for: country, collationStringSelector: #selector(getter: Country.name))
-            return country
+        let countries: [(Country, Int?)] = unsourtedCountries.map { country in
+            let country = Country(name: country.name, code: country.code, dialCode: country.dialCode, flagImage: country.flagImage)
+            
+            return (country, collation.section(for: country, collationStringSelector: #selector(getter: Country.name)))
         }
         
         // create empty sections
@@ -80,7 +75,7 @@ open class CountryPickerViewController: UITableViewController {
         
         // put each country in a section
         for country in countries {
-            sections[country.section!].addCountry(country)
+            sections[country.1!].addCountry(country.0)
         }
         
         // sort each section
@@ -96,7 +91,6 @@ open class CountryPickerViewController: UITableViewController {
     fileprivate let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
     
     open weak var delegate: CountryPickerDelegate?
-    open var didSelectCountryClosure: ((String, String, String, UIImage?) -> ())?
     open var showCallingCodes = false
     
     override open func viewDidLoad() {
@@ -169,7 +163,7 @@ extension CountryPickerViewController {
             : country.name
 
         
-        cell.imageView!.image = imageForCountry(country)
+        cell.imageView!.image = imageForCountryCode(country.code)
         return cell
     }
     
@@ -187,9 +181,9 @@ extension CountryPickerViewController {
         return collation.section(forSectionIndexTitle: index)
     }
     
-    fileprivate func imageForCountry(_ country: Country) -> UIImage? {
+    fileprivate func imageForCountryCode(_ countryCode: String) -> UIImage? {
         let bundle = "assets.bundle/"
-        return UIImage(named: bundle + country.code.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)
+        return UIImage(named: bundle + countryCode.lowercased() + ".png", in: Bundle(for: CountryPickerViewController.self), compatibleWith: nil)
     }
 }
 
@@ -201,13 +195,7 @@ extension CountryPickerViewController {
             ? filteredList[(indexPath as NSIndexPath).row]
             : sections[(indexPath as NSIndexPath).section].countries[(indexPath as NSIndexPath).row]
         
-        let image = imageForCountry(country)
-        
-        delegate?.countryPicker(self, didSelectCountryWithName: country.name, code: country.code)
-        delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode)
-        delegate?.countryPicker?(self, didSelectCountryWithName: country.name, code: country.code, dialCode: country.dialCode, image: image)
-        
-        didSelectCountryClosure?(country.name, country.code, country.dialCode, image)
+        delegate?.countryPicker(self, didSelectCountry: country)
     }
 }
 
