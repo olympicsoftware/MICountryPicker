@@ -38,9 +38,9 @@ open class CountryPickerViewController: UITableViewController {
     fileprivate var searchController: UISearchController!
     fileprivate var filteredList = [Country]()
     
-    fileprivate var unsourtedCountries : [Country] {
+    fileprivate var unsortedCountries : [Country] {
         let locale = Locale.current
-        var unsourtedCountries = [Country]()
+        var unsortedCountries = [Country]()
         let countriesCodes = customCountriesCode == nil ? Locale.isoRegionCodes : customCountriesCode!
         
         for countryCode in countriesCodes {
@@ -49,10 +49,10 @@ open class CountryPickerViewController: UITableViewController {
             
             let country = Country(name: displayName!, code: countryCode, dialCode: countryData.first?["dial_code"], flagImage: imageForCountryCode(countryCode))
             
-            unsourtedCountries.append(country)
+            unsortedCountries.append(country)
         }
         
-        return unsourtedCountries
+        return unsortedCountries
     }
     
     fileprivate var _sections: [Section]?
@@ -61,7 +61,7 @@ open class CountryPickerViewController: UITableViewController {
             return _sections!
         }
         
-        let countries: [(Country, Int?)] = unsourtedCountries.map { country in
+        let countries: [(Country, Int?)] = unsortedCountries.map { country in
             let country = Country(name: country.name, code: country.code, dialCode: country.dialCode, flagImage: country.flagImage)
             
             return (country, collation.section(for: country, collationStringSelector: #selector(getter: Country.name)))
