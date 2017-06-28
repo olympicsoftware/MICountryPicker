@@ -84,6 +84,7 @@ open class CountryPickerViewController: UITableViewController {
         
         return _sections!
     }
+    
     fileprivate let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
     
     open weak var delegate: CountryPickerDelegate?
@@ -128,17 +129,15 @@ open class CountryPickerViewController: UITableViewController {
 
 extension CountryPickerViewController {
     override open func numberOfSections(in tableView: UITableView) -> Int {
-        if searchController.searchBar.text!.characters.count > 0 {
-            return 1
-        }
-        return sections.count
+        return searchController.searchBar.text?.characters.count ?? 0 > 0
+            ? 1
+            : sections.count
     }
     
     override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.searchBar.text!.characters.count > 0 {
-            return filteredList.count
-        }
-        return sections[section].countries.count
+        return searchController.searchBar.text?.characters.count ?? 0 > 0
+            ? filteredList.count
+            : sections[section].countries.count
     }
     
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
