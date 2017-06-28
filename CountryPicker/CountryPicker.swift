@@ -163,7 +163,11 @@ extension CountryPickerViewController {
     }
     
     override open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return !sections[section].countries.isEmpty
+        let isSearching = searchController.searchBar.text?.characters.count ?? 0 > 0
+        
+        let hasCountriesInSection = !sections[section].countries.isEmpty
+        
+        return hasCountriesInSection && !isSearching
             ? self.collation.sectionTitles[section] as String
             : ""
     }
