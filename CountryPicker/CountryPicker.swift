@@ -38,21 +38,17 @@ open class CountryPickerViewController: UITableViewController {
     fileprivate var searchController: UISearchController!
     fileprivate var filteredList = [Country]()
     
-    fileprivate var unsourtedCountries : [Country] {
-        let locale = Locale.current
-        var unsourtedCountries = [Country]()
-        let countriesCodes = customCountriesCode == nil ? Locale.isoRegionCodes : customCountriesCode!
+    fileprivate var unsortedCountries : [Country] {
+        let countryCodes = customCountriesCode == nil
+            ? Locale.isoRegionCodes
+            : customCountriesCode!
         
-        for countryCode in countriesCodes {
-            let displayName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
-            let countryData = CallingCodes.filter { $0["code"] == countryCode }
-            
-            let country = Country(name: displayName!, code: countryCode, dialCode: countryData.first?["dial_code"], flagImage: imageForCountryCode(countryCode))
-            
-            unsourtedCountries.append(country)
-        }
-        
-        return unsourtedCountries
+        return countryCodes.map({ countryCode in
+            Country(name: (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)!,
+                    code: countryCode,
+                    dialCode: CallingCodes.filter { $0["code"] == countryCode }.first?["dial_code"],
+                    flagImage: imageForCountryCode(countryCode))
+        })
     }
     
     fileprivate var _sections: [Section]?
@@ -61,7 +57,7 @@ open class CountryPickerViewController: UITableViewController {
             return _sections!
         }
         
-        let countries: [(Country, Int?)] = unsourtedCountries.map { country in
+        let countries: [(Country, Int?)] = unsortedCountries.map { country in
             let country = Country(name: country.name, code: country.code, dialCode: country.dialCode, flagImage: country.flagImage)
             
             return (country, collation.section(for: country, collationStringSelector: #selector(getter: Country.name)))
@@ -88,6 +84,7 @@ open class CountryPickerViewController: UITableViewController {
         
         return _sections!
     }
+    
     fileprivate let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
     
     open weak var delegate: CountryPickerDelegate?
@@ -132,17 +129,15 @@ open class CountryPickerViewController: UITableViewController {
 
 extension CountryPickerViewController {
     override open func numberOfSections(in tableView: UITableView) -> Int {
-        if searchController.searchBar.text!.characters.count > 0 {
-            return 1
-        }
-        return sections.count
+        return searchController.searchBar.text?.characters.count ?? 0 > 0
+            ? 1
+            : sections.count
     }
     
     override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.searchBar.text!.characters.count > 0 {
-            return filteredList.count
-        }
-        return sections[section].countries.count
+        return searchController.searchBar.text?.characters.count ?? 0 > 0
+            ? filteredList.count
+            : sections[section].countries.count
     }
     
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -168,7 +163,11 @@ extension CountryPickerViewController {
     }
     
     override open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return !sections[section].countries.isEmpty
+        let isSearching = searchController.searchBar.text?.characters.count ?? 0 > 0
+        
+        let hasCountriesInSection = !sections[section].countries.isEmpty
+        
+        return hasCountriesInSection && !isSearching
             ? self.collation.sectionTitles[section] as String
             : ""
     }
