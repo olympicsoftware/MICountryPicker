@@ -39,20 +39,16 @@ open class CountryPickerViewController: UITableViewController {
     fileprivate var filteredList = [Country]()
     
     fileprivate var unsortedCountries : [Country] {
-        let locale = Locale.current
-        var unsortedCountries = [Country]()
-        let countriesCodes = customCountriesCode == nil ? Locale.isoRegionCodes : customCountriesCode!
+        let countryCodes = customCountriesCode == nil
+            ? Locale.isoRegionCodes
+            : customCountriesCode!
         
-        for countryCode in countriesCodes {
-            let displayName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
-            let countryData = CallingCodes.filter { $0["code"] == countryCode }
-            
-            let country = Country(name: displayName!, code: countryCode, dialCode: countryData.first?["dial_code"], flagImage: imageForCountryCode(countryCode))
-            
-            unsortedCountries.append(country)
-        }
-        
-        return unsortedCountries
+        return countryCodes.map({ countryCode in
+            Country(name: (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)!,
+                    code: countryCode,
+                    dialCode: CallingCodes.filter { $0["code"] == countryCode }.first?["dial_code"],
+                    flagImage: imageForCountryCode(countryCode))
+        })
     }
     
     fileprivate var _sections: [Section]?
